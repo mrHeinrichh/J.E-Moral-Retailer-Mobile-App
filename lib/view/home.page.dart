@@ -27,6 +27,9 @@ class _HomePageState extends State<HomePage> {
     if (response.statusCode == 200) {
       final parsedData = json.decode(response.body);
       final data = parsedData['data'];
+   if (!mounted) {
+      return; // Check if the widget is still in the tree
+    }
 
       setState(() {
         final Map<String, List<Map<String, dynamic>>> groupedData = {};

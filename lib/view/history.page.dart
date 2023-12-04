@@ -39,6 +39,9 @@ class _HistoryPageState extends State<HistoryPage> {
 
       if (data != null && data['status'] == 'success') {
         final List<dynamic> transactionsData = data['data'] ?? [];
+   if (!mounted) {
+      return; // Check if the widget is still in the tree
+    }
 
         setState(() {
           visibleTransactions = transactionsData.cast<Map<String, dynamic>>();
