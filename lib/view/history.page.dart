@@ -33,15 +33,15 @@ class _HistoryPageState extends State<HistoryPage> {
     final searchUrl = '$apiUrl/?search=$userId';
 
     final response = await http.get(Uri.parse(searchUrl));
+    if (!mounted) {
+      return; // Check if the widget is still in the tree
+    }
 
     if (response.statusCode == 200) {
       final Map<String, dynamic>? data = jsonDecode(response.body);
 
       if (data != null && data['status'] == 'success') {
         final List<dynamic> transactionsData = data['data'] ?? [];
-   if (!mounted) {
-      return; // Check if the widget is still in the tree
-    }
 
         setState(() {
           visibleTransactions = transactionsData.cast<Map<String, dynamic>>();

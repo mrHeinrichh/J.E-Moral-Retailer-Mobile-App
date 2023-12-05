@@ -23,13 +23,13 @@ class _HomePageState extends State<HomePage> {
   Future<void> fetchDataFromAPI() async {
     final url = Uri.parse('https://lpg-api-06n8.onrender.com/api/v1/items');
     final response = await http.get(url);
+    if (!mounted) {
+      return; // Check if the widget is still in the tree
+    }
 
     if (response.statusCode == 200) {
       final parsedData = json.decode(response.body);
       final data = parsedData['data'];
-   if (!mounted) {
-      return; // Check if the widget is still in the tree
-    }
 
       setState(() {
         final Map<String, List<Map<String, dynamic>>> groupedData = {};
@@ -135,6 +135,16 @@ class _HomePageState extends State<HomePage> {
             fontSize: 30,
             color: Color(0xFF232937),
           ),
+        ),
+        const Text('Applying for a Rider?'),
+        CustomizedButton(
+          onPressed: () {
+            Navigator.pushNamed(context, appointmentRoute);
+          },
+          text: 'Book an Appointment',
+          height: 40,
+          width: 330,
+          fontz: 15,
         ),
         Expanded(
           child: ListView.builder(

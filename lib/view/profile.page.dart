@@ -39,6 +39,7 @@ class _ProfilePageState extends State<ProfilePage> {
         body: jsonEncode({
           'name': name,
           'contactNumber': contactNumber,
+          'type': "retailer",
           'address': address,
         }),
       );
@@ -117,7 +118,7 @@ class _ProfilePageState extends State<ProfilePage> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 const Text(
-                  'Registered Customer',
+                  'Registered retailer',
                   style: TextStyle(
                     fontSize: 24,
                     color: Colors.white,
